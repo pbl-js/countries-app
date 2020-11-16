@@ -12,7 +12,6 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <BrowserRouter>
-        <Navigation />
         <MainRouter />
       </BrowserRouter>
     </ThemeProvider>
