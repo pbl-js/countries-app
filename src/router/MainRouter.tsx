@@ -11,7 +11,7 @@ const MainRouter: React.FC = () => {
     <MainLayout>
       <Switch>
         <Route exact path={routes.home} component={Home} />
-        <Route exact path={routes.about} component={AboutUs} />
+        <Route path={routes.about} component={AboutUs} />
       </Switch>
     </MainLayout>
   );
