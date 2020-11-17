@@ -4,16 +4,17 @@ const theme: DefaultTheme = {
   colors: {
     main: "#ffffff",
     secondary: "#EFF2F7",
+    tertiary: "#f0f5ff",
 
     blue: "#2D66FE",
 
-    textPrimary: "7F7F7F",
-    textSecondary: "C4C4C4",
+    textPrimary: "#2d2d2d",
+    textSecondary: "#a5a5a5",
   },
   borderRadius: {
-    main: "20px",
-    secondary: "50px",
-    tertiary: "100px",
+    main: "50px",
+    secondary: "15px",
+    tertiary: "20px",
   },
   fontSize: {
     xxxs: "1.2rem",

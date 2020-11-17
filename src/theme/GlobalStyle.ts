@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
     body {
         font-family: "Montserrat", sans-serif;
         font-size: 1.6rem;
-        background-color: ${({ theme }) => theme.colors.main};
+        background-color: ${({ theme }) => theme.colors.secondary};
         color: ${({ theme }) => theme.colors.textPrimary};
     }
 `;
