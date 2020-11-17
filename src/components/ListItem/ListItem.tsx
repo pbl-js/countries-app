@@ -24,14 +24,22 @@ const NameAndContinent = styled.div`
 
 interface IListItem {
   even: boolean;
+  countryData: {
+    code: string;
+    name: string;
+    continent: string;
+  };
 }
 
-const ListItem: React.FC<IListItem> = ({ even }) => {
+const ListItem: React.FC<IListItem> = ({
+  even,
+  countryData: { code, name, continent },
+}) => {
   return (
     <MainWrapper even={even}>
       <NameAndContinent>
-        <p className="name">United Arab Emirates</p>
-        <p className="continent">Asia</p>
+        <p className="name">{name}</p>
+        <p className="continent">{continent}</p>
       </NameAndContinent>
     </MainWrapper>
   );

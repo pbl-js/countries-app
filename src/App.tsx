@@ -4,17 +4,21 @@ import GlobalStyle from "theme/GlobalStyle";
 import { ThemeProvider } from "styled-components";
 import theme from "theme/theme";
 
+import { ApolloProvider } from "@apollo/client";
+import client from "apollo/client";
+
 import MainRouter from "router/MainRouter";
-import Navigation from "components/Navigation/Navigation";
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <BrowserRouter>
-        <MainRouter />
-      </BrowserRouter>
-    </ThemeProvider>
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <BrowserRouter>
+          <MainRouter />
+        </BrowserRouter>
+      </ThemeProvider>
+    </ApolloProvider>
   );
 }
 
