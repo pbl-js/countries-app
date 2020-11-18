@@ -1,60 +1,18 @@
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
+import { GET_COUNTRIES, IcountriesData } from "apollo/queries/getCountries";
 
-import { MainWrapper, Search, ListWrapper } from "./Home.style";
-import ListItem from "components/ListItem/ListItem";
-
-const GET_COUNTRIES = gql`
-  {
-    countries {
-      code
-      name
-      continent {
-        name
-      }
-    }
-  }
-`;
-
-interface Icountry {
-  code: string;
-  name: string;
-  continent: {
-    name: string;
-  };
-}
-
-interface IcountriesData {
-  countries: Icountry[];
-}
+import CountriesList from "components/CountriesList/CountriesList";
 
 const Home: React.FC<RouteComponentProps> = () => {
-  const { loading, data } = useQuery<IcountriesData>(GET_COUNTRIES);
+  const { loading, error, data } = useQuery<IcountriesData>(GET_COUNTRIES);
 
-  return (
-    <MainWrapper>
-      <Search />
-      <ListWrapper>
-        {data &&
-          data.countries.map((country) => {
-            const countryData = {
-              code: country.code,
-              name: country.name,
-              continent: country.continent.name,
-            };
+  if (loading) return <div>Loading...</div>;
 
-            return (
-              <ListItem
-                key={country.code}
-                even={true}
-                countryData={countryData}
-              />
-            );
-          })}
-      </ListWrapper>
-    </MainWrapper>
-  );
+  if (error) return <div>{`Error! ${error.message}`}</div>;
+
+  return <CountriesList countriesData={data?.countries} />;
 };
 
 export default Home;

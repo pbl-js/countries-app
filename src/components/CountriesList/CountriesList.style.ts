@@ -8,6 +8,22 @@ export const MainWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: ${({ theme }) => theme.mainPadding};
+
+  ul.container {
+    display: grid;
+    grid-template-rows: 50px;
+    grid-template-columns: repeat(auto-fit, 40px);
+    grid-gap: 20px;
+    width: 100%;
+    height: 50px;
+    list-style: none;
+
+    li {
+      width: 20px;
+      height: 20px;
+      background-color: white;
+    }
+  }
 `;
 
 export const Search = styled.div`
