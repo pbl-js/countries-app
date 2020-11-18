@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
+import { useParams } from "react-router-dom";
 import { Icountry } from "apollo/queries/getCountries";
 
 import { MainWrapper, Search, ListWrapper } from "./CountriesList.style";
 import ListItem from "components/ListItem/ListItem";
 
 interface ICountriesList {
-  countriesData: any;
+  countriesData: Icountry[];
+}
+
+interface IRouteParams {
+  page: string;
 }
 
 const CountriesList: React.FC<ICountriesList> = ({ countriesData }) => {
+  const { page: pageParam } = useParams<IRouteParams>();
+  const initialPage = parseInt(pageParam);
   const itemsPerPage = 5;
   const pagesNumber = Math.ceil(countriesData.length / itemsPerPage);
-  const [offset, setOffset] = useState(0);
+  const [offset, setOffset] = useState(initialPage * itemsPerPage);
   const [itemsToDisplay, setItemsToDisplay] = useState<Icountry[]>([]);
 
   const handlePageChange = (index: { selected: number }) => {
@@ -46,6 +53,7 @@ const CountriesList: React.FC<ICountriesList> = ({ countriesData }) => {
         pageCount={pagesNumber}
         pageRangeDisplayed={3}
         marginPagesDisplayed={2}
+        initialPage={initialPage}
         containerClassName="container"
         onPageChange={handlePageChange}
       />

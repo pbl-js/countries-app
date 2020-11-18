@@ -12,7 +12,7 @@ const Home: React.FC<RouteComponentProps> = () => {
 
   if (error) return <div>{`Error! ${error.message}`}</div>;
 
-  return <CountriesList countriesData={data?.countries} />;
+  return <div>{data && <CountriesList countriesData={data.countries} />}</div>;
 };
 
 export default Home;

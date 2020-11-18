@@ -28,9 +28,7 @@ const StyledNavLink = styled(NavLink)`
 const Navigation: React.FC = () => {
   return (
     <nav>
-      <StyledNavLink exact to={routes.home}>
-        Home
-      </StyledNavLink>
+      <StyledNavLink to={`${routes.countries}/1`}>Home</StyledNavLink>
       <StyledNavLink to={routes.about}>About</StyledNavLink>
     </nav>
   );
