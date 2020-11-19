@@ -3,7 +3,7 @@ import { useParams, useHistory, useRouteMatch } from "react-router-dom";
 import { Icountry } from "apollo/queries/getCountries";
 import routes from "router/routes";
 
-import { MainWrapper, Search, ListWrapper } from "./CountriesList.style";
+import { MainWrapper, ListWrapper } from "./CountriesList.style";
 import ListItem from "components/ListItem/ListItem";
 import Paginator from "components/Paginator/Paginator";
 
@@ -21,10 +21,10 @@ const CountriesList: React.FC<ICountriesList> = ({ countriesData }) => {
   const routeParams = useParams<IRouteParams>();
 
   const pageParam = parseInt(routeParams.page);
+  const [currentPage, setCurrentPage] = useState(pageParam);
   const itemsPerPage = 5;
   const pagesNumber = Math.ceil(countriesData.length / itemsPerPage);
-  const [currentPage, setCurrentPage] = useState(pageParam);
-  const offset = currentPage * itemsPerPage;
+  const offset = currentPage * itemsPerPage - itemsPerPage;
   const [itemsToDisplay, setItemsToDisplay] = useState<Icountry[]>([]);
 
   const handlePageChange = (index: { selected: number }) => {
@@ -48,7 +48,6 @@ const CountriesList: React.FC<ICountriesList> = ({ countriesData }) => {
 
   return (
     <MainWrapper>
-      <Search />
       <ListWrapper>
         {itemsToDisplay.map((country, index) => {
           const countryData = {
