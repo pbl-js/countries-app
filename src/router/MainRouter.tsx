@@ -14,6 +14,10 @@ const MainRouter: React.FC = () => {
           <Redirect to={`${routes.countries}/1`} />
         </Route>
 
+        <Route exact path={routes.countries}>
+          <Redirect to={`${routes.countries}/1`} />
+        </Route>
+
         <Route exact path={`${routes.countries}/:page`} component={Home} />
         <Route exact path={routes.about} component={AboutUs} />
       </Switch>
