@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import breakPoints from "theme/breakPoints";
 
 import Navigation from "components/Navigation/Navigation";
 import Footer from "components/Footer/Footer";
