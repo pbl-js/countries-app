@@ -5,21 +5,24 @@ import { MainWrapper, Next, Previous } from "./Paginator.style";
 interface IPaginator {
   pagesNumber: number;
   initialPage: number;
+  currentPage: number;
   handlePageChange: (index: { selected: number }) => void;
 }
 
 const Paginator: React.FC<IPaginator> = ({
   pagesNumber,
+  currentPage,
   initialPage,
   handlePageChange,
 }) => {
   return (
     <MainWrapper>
       <ReactPaginate
+        disableInitialCallback={true}
         pageCount={pagesNumber}
         pageRangeDisplayed={3}
         marginPagesDisplayed={1}
-        initialPage={initialPage}
+        initialPage={initialPage - 1}
         onPageChange={handlePageChange}
         containerClassName="container"
         previousLinkClassName="previous"
@@ -28,6 +31,7 @@ const Paginator: React.FC<IPaginator> = ({
         activeLinkClassName="active"
         nextLabel={<Next />}
         previousLabel={<Previous />}
+        forcePage={currentPage - 1}
       />
     </MainWrapper>
   );

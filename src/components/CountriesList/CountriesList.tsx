@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory, useRouteMatch } from "react-router-dom";
 import { Icountry } from "apollo/queries/getCountries";
+import routes from "router/routes";
 
 import { MainWrapper, Search, ListWrapper } from "./CountriesList.style";
 import ListItem from "components/ListItem/ListItem";
@@ -15,15 +16,20 @@ interface IRouteParams {
 }
 
 const CountriesList: React.FC<ICountriesList> = ({ countriesData }) => {
-  const { page: pageParam } = useParams<IRouteParams>();
-  const initialPage = parseInt(pageParam);
+  const history = useHistory();
+  const match = useRouteMatch("/countries/:page");
+  const routeParams = useParams<IRouteParams>();
+
+  const pageParam = parseInt(routeParams.page);
   const itemsPerPage = 5;
   const pagesNumber = Math.ceil(countriesData.length / itemsPerPage);
-  const [offset, setOffset] = useState(initialPage * itemsPerPage);
+  const [currentPage, setCurrentPage] = useState(pageParam);
+  const offset = currentPage * itemsPerPage;
   const [itemsToDisplay, setItemsToDisplay] = useState<Icountry[]>([]);
 
   const handlePageChange = (index: { selected: number }) => {
-    setOffset(itemsPerPage * index.selected);
+    setCurrentPage(index.selected + 1);
+    history.push(`${routes.countries}/${index.selected + 1}`);
   };
 
   useEffect(() => {
@@ -32,7 +38,13 @@ const CountriesList: React.FC<ICountriesList> = ({ countriesData }) => {
       offset + itemsPerPage
     );
     setItemsToDisplay(newItemsToDisplay);
-  }, [countriesData, offset]);
+  }, [countriesData, currentPage]);
+
+  useEffect(() => {
+    if (currentPage != pageParam) {
+      setCurrentPage(pageParam);
+    }
+  }, [match]);
 
   return (
     <MainWrapper>
@@ -57,7 +69,8 @@ const CountriesList: React.FC<ICountriesList> = ({ countriesData }) => {
 
       <Paginator
         pagesNumber={pagesNumber}
-        initialPage={initialPage}
+        initialPage={pageParam}
+        currentPage={currentPage}
         handlePageChange={handlePageChange}
       />
     </MainWrapper>
