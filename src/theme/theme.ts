@@ -14,7 +14,7 @@ const theme: DefaultTheme = {
   borderRadius: {
     main: "50px",
     secondary: "15px",
-    tertiary: "20px",
+    tertiary: "5px",
   },
   fontSize: {
     xxxs: "1.2rem",

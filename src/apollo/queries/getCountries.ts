@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 export const GET_COUNTRIES = gql`
   {
     countries {
-      id
+      code
       name
       continent {
         name
@@ -13,7 +13,7 @@ export const GET_COUNTRIES = gql`
 `;
 
 export interface Icountry {
-  id: string;
+  code: string;
   name: string;
   continent: {
     name: string;

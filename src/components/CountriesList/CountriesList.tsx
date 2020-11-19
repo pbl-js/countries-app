@@ -3,7 +3,13 @@ import ReactPaginate from "react-paginate";
 import { useParams } from "react-router-dom";
 import { Icountry } from "apollo/queries/getCountries";
 
-import { MainWrapper, Search, ListWrapper } from "./CountriesList.style";
+import {
+  MainWrapper,
+  Search,
+  ListWrapper,
+  PaginatorNext,
+  PaginatorPrevious,
+} from "./CountriesList.style";
 import ListItem from "components/ListItem/ListItem";
 
 interface ICountriesList {
@@ -38,24 +44,35 @@ const CountriesList: React.FC<ICountriesList> = ({ countriesData }) => {
     <MainWrapper>
       <Search />
       <ListWrapper>
-        {itemsToDisplay.map((country) => {
+        {itemsToDisplay.map((country, index) => {
           const countryData = {
-            code: country.id,
+            code: country.code,
             name: country.name,
             continent: country.continent.name,
           };
+
           return (
-            <ListItem key={country.id} even={true} countryData={countryData} />
+            <ListItem
+              key={country.code}
+              even={(index + 1) % 2 === 0 ? true : false}
+              countryData={countryData}
+            />
           );
         })}
       </ListWrapper>
       <ReactPaginate
         pageCount={pagesNumber}
         pageRangeDisplayed={3}
-        marginPagesDisplayed={2}
+        marginPagesDisplayed={1}
         initialPage={initialPage}
-        containerClassName="container"
         onPageChange={handlePageChange}
+        containerClassName="container"
+        previousLinkClassName="previous"
+        disabledClassName="disabled"
+        nextLinkClassName="next"
+        activeLinkClassName="active"
+        nextLabel={<PaginatorNext />}
+        previousLabel={<PaginatorPrevious />}
       />
     </MainWrapper>
   );

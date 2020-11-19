@@ -16,7 +16,7 @@ const cache = new InMemoryCache({
 });
 
 const client = new ApolloClient({
-  uri: "https://api.everbase.co/graphql?apikey=your_key",
+  uri: "https://countries.trevorblades.com/",
   cache: cache,
 });
 
