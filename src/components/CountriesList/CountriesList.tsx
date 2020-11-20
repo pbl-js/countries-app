@@ -38,13 +38,13 @@ const CountriesList: React.FC<ICountriesList> = ({ countriesData }) => {
       offset + itemsPerPage
     );
     setItemsToDisplay(newItemsToDisplay);
-  }, [countriesData, currentPage]);
+  }, [countriesData, currentPage, offset]);
 
   useEffect(() => {
-    if (currentPage != pageParam) {
+    if (currentPage !== pageParam) {
       setCurrentPage(pageParam);
     }
-  }, [match]);
+  }, [match, currentPage, pageParam]);
 
   return (
     <MainWrapper>
